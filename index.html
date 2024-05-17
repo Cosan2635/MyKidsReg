@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MyKidsRegApp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="info-section">
+                <h2>Velkommen til MyKidsReg!</h2>
+                <p>Her kan du administrere dine børns registreringer og aktiviteter på en let og sikker måde.</p>
+            </div>
+            <div class="login-section">
+                <h2>Login</h2>
+                <form id="login-form">
+                    <div class="input-group">
+                        <label for="username">Brugernavn:</label>
+                        <input type="text" id="username" name="username" placeholder="Indtast dit brugernavn" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Adgangskode:</label>
+                        <div class="password-input-group">
+                            <input type="password" id="password" name="password" placeholder="Indtast din adgangskode" required>
+                            <span class="toggle-password"><i class="fas fa-eye"></i></span> <!-- Font Awesome Eye Icon -->
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="button" class="btn btn-secondary" id="forgot-password">Glemt adgangskode</button>
+                </form>
+                <p id="error-message"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
