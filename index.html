@@ -2,41 +2,75 @@
 <html lang="da">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Login - MyKidsRegApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="https://unpkg.com/vue@next"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
+    <div id="app" class="container">
         <div class="content">
             <div class="info-section">
                 <h2>Velkommen til MyKidsReg!</h2>
                 <p>Her kan du administrere dine børns registreringer og aktiviteter på en let og sikker måde.</p>
             </div>
-            <div class="login-section">
+            <div class="login-section" v-if="!changePasswordRequired">
                 <h2>Login</h2>
-                <form id="login-form">
+                <form @submit.prevent="onSubmit">
                     <div class="input-group">
-                        <label for="username">Brugernavn:</label>
-                        <input type="text" id="username" name="username" placeholder="Indtast dit brugernavn" required>
+                        <label :for="username">{{ usernameLabel }}</label>
+                        <input type="text" id="username" name="username" v-model="username" @focus="onFocus('username')" @blur="onBlur('username')" placeholder="Indtast dit brugernavn" required>
                     </div>
                     <div class="input-group">
-                        <label for="password">Adgangskode:</label>
+                        <label :for="password">{{ passwordLabel }}</label>
                         <div class="password-input-group">
-                            <input type="password" id="password" name="password" placeholder="Indtast din adgangskode" required>
-                            <span class="toggle-password"><i class="fas fa-eye"></i></span> <!-- Font Awesome Eye Icon -->
+                            <input :type="showPassword ? 'text' : 'password'" id="password" name="password" v-model="password" @focus="onFocus('password')" @blur="onBlur('password')" placeholder="Indtast din adgangskode" required>
+                            <span class="toggle-password" @click="togglePasswordVisibility('password')">
+                                <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                            </span>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Login</button>
-                    <button type="button" class="btn btn-secondary" id="forgot-password">Glemt adgangskode</button>
+                    <button type="button" class="btn btn-secondary" @click="onForgotPassword">Glemt adgangskode</button>
                 </form>
-                <p id="error-message"></p>
+                <p id="error-message">{{ errorMessage }}</p>
+            </div>
+
+            <div class="login-section" v-if="changePasswordRequired">
+                <h2>Ændre Adgangskode</h2>
+                <form @submit.prevent="onSubmit">
+                    <div class="input-group">
+                        <label for="new-password">Ny Adgangskode:</label>
+                        <div class="password-input-group">
+                            <input :type="showNewPassword ? 'text' : 'password'" id="new-password" name="new-password" v-model="newPassword" placeholder="Indtast din nye adgangskode" required>
+                            <span class="toggle-password" @click="togglePasswordVisibility('newPassword')">
+                                <i :class="showNewPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="confirm-password">Bekræft Ny Adgangskode:</label>
+                        <div class="password-input-group">
+                            <input :type="showConfirmPassword ? 'text' : 'password'" id="confirm-password" name="confirm-password" v-model="confirmPassword" placeholder="Bekræft din nye adgangskode" required>
+                            <span class="toggle-password" @click="togglePasswordVisibility('confirmPassword')">
+                                <i :class="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ændre Adgangskode</button>
+                </form>
+                <p id="error-message">{{ errorMessage }}</p>
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
