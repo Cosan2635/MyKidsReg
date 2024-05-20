@@ -3,13 +3,16 @@ new Vue({
     data: {
         API_URL: 'http://localhost:5191/api/Users',
         tableTitle: 'Bruger Sektion',
-        tableData: []
+        tableData: [], 
+        id : 0
     },
     methods: {
-        loadTableData(type) {
-            this.tableTitle = `${type.charAt(0).toUpperCase() + type.slice(1)} Sektion`;
-            axios.get(`${this.API_URL}/${type}`)
+        loadTableData() {
+            const url = `${this.API_URL}`;
+            console.log('Loading data from URL:', url); // Debug log
+            axios.get(url)
                 .then(response => {
+                    console.log('Data loaded:', response.data); // Debug log
                     this.tableData = response.data;
                 })
                 .catch(error => {
@@ -18,47 +21,48 @@ new Vue({
         },
         createUser() {
             // Naviger til opret bruger siden
-            window.location.href = 'createuser.html';
+            window.location.href = 'createUser.html';
         },
         viewDetails(id) {
-            // Hent detaljer for en specifik bruger
-            axios.get(`${this.API_URL}/bruger/${id}`)
+            const url = `${this.API_URL}/${id}`;
+            console.log('Viewing details for user with ID:', id, 'URL:', url); // Debug log
+            axios.get(url)
                 .then(response => {
                     console.log('Bruger detaljer:', response.data);
-                    // Du kan vise detaljer i en modal eller et nyt vindue
-                    alert(`Bruger detaljer:\nID: ${response.data.id}\nNavn: ${response.data.navn}\nType: ${response.data.type}`);
+                    // Vis brugeroplysningerne i en modal eller et nyt vindue
+                    // Her vises oplysningerne som en simpel alert-besked, men du kan ændre dette til at passe til din brugergrænseflade
+                    alert(`Bruger detaljer:\nID: ${response.data.User_Id}\nNavn: ${response.data.Name}\nType: ${response.data.Usertype}\nAdresse: ${response.data.Address}\nEmail: ${response.data.E_mail}\nMobilnummer: ${response.data.Mobil_nr}`);
                 })
                 .catch(error => {
                     console.error('Fejl ved hentning af bruger detaljer:', error);
                 });
         },
         editItem(id) {
-            // Rediger en specifik bruger
-            axios.put(`${this.API_URL}/bruger/${id}`, {
-                navn: 'Opdateret Navn', // Eksempel data
-                type: 'Opdateret Type'  // Eksempel data
-            })
-            .then(response => {
-                console.log('Bruger opdateret:', response.data);
-                this.loadTableData('bruger'); // Opdatér tabeldata efter redigering
-            })
-            .catch(error => {
-                console.error('Fejl ved opdatering af bruger:', error);
-            });
+            console.log('Received user ID:', id); // Tilføjet konsollogning
+            if (id) {
+                // Naviger til updateuser.html med brugerens ID som parameter
+                window.location.href = `updateuser.html?id=${id}`;
+            } else {
+                console.error('Ugyldigt bruger-ID.');
+            }
         },
+        
+        
+        
         deleteItem(id) {
-            // Slet en specifik bruger
-            axios.delete(`${this.API_URL}/bruger/${id}`)
+            const url = `${this.API_URL}/${id}`;
+            console.log('Deleting user with ID:', id, 'URL:', url); // Debug log
+            axios.delete(url)
                 .then(response => {
                     console.log('Bruger slettet:', response.data);
-                    this.loadTableData('bruger'); // Opdatér tabeldata efter sletning
+                    this.loadTableData(); // Opdatér tabeldata efter sletning
                 })
                 .catch(error => {
                     console.error('Fejl ved sletning af bruger:', error);
                 });
-        }
+        }        
     },
     mounted() {
-        this.loadTableData('bruger'); // Indlæs brugerdata som standard
+        this.loadTableData(); // Indlæs brugerdata som standard
     }
 });

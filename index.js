@@ -55,23 +55,28 @@ new Vue({
                 password: this.password
             })
             .then(response => {
-                const role = response.data.usertype; 
-                if (role === undefined) {
-                    
-                    console.error('Role is undefined in API response');
+                const userType = response.data.usertype; 
+                if (userType === undefined) {
+                    console.error('User type is undefined in API response');
                     this.errorMessage = 'Fejl ved login. Kontakt systemadministrator.';
                 } else {
-                    switch (role) {
+                    // Redirect based on user type
+                    switch (userType) {
                         case 0: // Super_Admin
-                            window.location.href = 'super_admin.html';
+                            window.location.href = 'superadmin.html';
                             break;
                         case 1: // Admin
                             window.location.href = 'admin.html';
                             break;
-                      
+                        case 2: // Padagogue
+                            // Handle Padagogue logic
+                            break;
+                        case 3: // Parent
+                            // Handle Parent logic
+                            break;
                         default:
-                            console.error('Invalid role:', role);
-                            this.errorMessage = 'Ugyldig rolle. Kontakt systemadministrator.';
+                            console.error('Invalid user type:', userType);
+                            this.errorMessage = 'Ugyldig brugertype. Kontakt systemadministrator.';
                             break;
                     }
                 }
@@ -80,6 +85,8 @@ new Vue({
                 this.errorMessage = 'Fejl ved login. Tjek dine oplysninger og prøv igen.';
                 console.error('Login error:', error);
             });
+        
+        
         },
         changePassword() {
             // Implementer ændring af adgangskode logik her
