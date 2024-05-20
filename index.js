@@ -1,4 +1,4 @@
-const API_URL = "mykidsreg20240518001356.azurewebsites.net/api"; // Korrekt API URL
+const API_URL = "mykidsreg20240518001356.azurewebsites.net"; // Korrekt API URL
 
 new Vue({
     data() {
