@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5191/api/Users"; // Korrekt API URL
+const API_URL = "http://localhost:5191/api/Users/login"; 
 
 new Vue({
     data() {
@@ -49,19 +49,31 @@ new Vue({
             }
         },
         login() {
-            console.log('Attempting to login with username:', this.username); // Log for debugging
+            console.log('Attempting to login with username:', this.username);
             axios.post(API_URL, {
                 username: this.username,
                 password: this.password
             })
             .then(response => {
-                if (response.data.role === 'super_admin') {
-                    window.location.href = 'super_admin.html';
-                } else if (response.data.role === 'admin') {
-                    window.location.href = 'admin.html';
+                const role = response.data.usertype; 
+                if (role === undefined) {
+                    
+                    console.error('Role is undefined in API response');
+                    this.errorMessage = 'Fejl ved login. Kontakt systemadministrator.';
                 } else {
-                    console.error('Invalid role:', response.data.role);
-                    this.errorMessage = 'Ugyldig rolle. Kontakt systemadministrator.';
+                    switch (role) {
+                        case 0: // Super_Admin
+                            window.location.href = 'super_admin.html';
+                            break;
+                        case 1: // Admin
+                            window.location.href = 'admin.html';
+                            break;
+                      
+                        default:
+                            console.error('Invalid role:', role);
+                            this.errorMessage = 'Ugyldig rolle. Kontakt systemadministrator.';
+                            break;
+                    }
                 }
             })
             .catch(error => {
