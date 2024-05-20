@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opret Bruger</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="app" class="container">
@@ -14,8 +13,8 @@
                 <h2 class="mt-5">Opret Bruger</h2>
                 <form @submit.prevent="createUser">
                     <div class="form-group" style="margin-bottom: 10px;">
-                        <label for="username">Brugernavn</label>
-                        <input type="text" class="form-control" id="username" v-model="userData.username" required>
+                        <label for="user_Name">Brugernavn</label>
+                        <input type="text" class="form-control" id="user_Name" v-model="userData.user_Name" required>
                     </div>
                     <div class="form-group" style="margin-bottom: 10px;">
                         <label for="name">Fornavn</label>
@@ -31,23 +30,23 @@
                     </div>
                     <div class="form-group" style="margin-bottom: 10px;">
                         <label for="zip_code">Postnummer</label>
-                        <input type="text" class="form-control" id="zip_code" v-model="userData.zip_code" required>
+                        <input type="number" class="form-control" id="zip_code" v-model="userData.zip_code" required>
                     </div>
                     <div class="form-group" style="margin-bottom: 10px;">
-                        <label for="email">E-mail</label>
-                        <input type="email" class="form-control" id="email" v-model="userData.email" required>
+                        <label for="e_mail">E-mail</label>
+                        <input type="email" class="form-control" id="e_mail" v-model="userData.e_mail" required>
                     </div>
                     <div class="form-group" style="margin-bottom: 10px;">
-                        <label for="tlf_nr">Telefonnummer</label>
-                        <input type="text" class="form-control" id="tlf_nr" v-model="userData.tlf_nr" required>
+                        <label for="mobil_nr">Telefonnummer</label>
+                        <input type="number" class="form-control" id="mobil_nr" v-model="userData.mobil_nr" required>
                     </div>
                     <div class="form-group" style="margin-bottom: 10px;">
                         <label for="user_type">BrugerType</label>
                         <select class="form-control" id="user_type" v-model="userData.user_type" required>
                             <option value="Super-admin">Super-admin</option>
                             <option value="Admin">Admin</option>
-                            <option value="Pedagogue">Pædagog</option>
-                            <option value="Parent">Forælder</option>
+                            <option value="Pedagogue">Pedagogue</option>
+                            <option value="Parent">Parent</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Opret Bruger</button>

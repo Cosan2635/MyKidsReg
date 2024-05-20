@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Hent brugerdata og udfyld formularen
     if (userId) {
-        axios.get(`https://mykidsreg20240518001356.azurewebsites.net/api/bruger/${userId}`)
+        axios.get(`http://localhost:5191/swagger/index.html/${userId}`)
             .then(response => {
                 const user = response.data;
                 form.user_id.value = user.id;

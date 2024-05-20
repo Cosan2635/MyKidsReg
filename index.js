@@ -1,4 +1,4 @@
-const API_URL = "mykidsreg20240518001356.azurewebsites.net"; // Korrekt API URL
+const API_URL = "http://localhost:5191/api/Users"; // Korrekt API URL
 
 new Vue({
     data() {
@@ -50,7 +50,7 @@ new Vue({
         },
         login() {
             console.log('Attempting to login with username:', this.username); // Log for debugging
-            axios.post(`${API_URL}/login`, {
+            axios.post(API_URL, {
                 username: this.username,
                 password: this.password
             })

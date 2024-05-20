@@ -1,7 +1,7 @@
 new Vue({
     el: '#app',
     data: {
-        API_URL: 'https://mykidsreg20240518001356.azurewebsites.net/api',
+        API_URL: 'http://localhost:5191/api/Users',
         tableTitle: 'Bruger Sektion',
         tableData: []
     },
