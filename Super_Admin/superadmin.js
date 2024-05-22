@@ -89,20 +89,36 @@ new Vue({
                     console.error('Fejl ved hentning af studerende:', error);
                 });
         },
+        
         getUsernameById(userId) {
             const user = this.users.find(user => user.user_Id === userId);
             return user ? user.name  : 'Ukendt bruger';            
         },
+
         getLastNameById(userId) {
             const user = this.users.find(user => user.user_Id === userId);
             return user ? user.last_name : 'Ukendt bruger';            
         },
+
         getStudentNameById(studentId) {
             const student = this.students.find(student => student.id === studentId);
             return student ? student.name : 'Ukendt studerende';
         },
+        loadAdminRelations() {
+            axios.get(this.ADMIN_RELATION_API_URL)
+                .then(response => {
+                    this.tableData = response.data;
+                    this.tableTitle = 'Admin og Institution Relationer';
+                    // Additional logic if needed
+                })
+                .catch(error => {
+                    console.error('Fejl ved indlæsning af admin relationer:', error);
+                });
+        },
+        
+
         createUser() {
-            window.location.href = 'createUser.html';
+            window.location.href = '../User/createUser.html';
         },
         createInstitution() {
             window.location.href = 'createInstitution.html';
@@ -110,7 +126,7 @@ new Vue({
         viewUserDetails(user_Id) {
             if (user_Id != null) {
                 console.log('Navigating to GetById.html for user with ID:', user_Id); 
-                window.location.href = `GetById.html?id=${user_Id}`;
+                window.location.href = `../User/GetById.html?id=${user_Id}`;
             } else {
                 console.error('Ugyldigt bruger-ID.');
             }
@@ -118,32 +134,33 @@ new Vue({
         viewInstitutionDetails(instId) {
             if (instId != null) {
                 console.log('Navigating to showInstitutionsInfo.html for institution with ID:', instId);
-                window.location.href = `showInstitutionsInfo.html?id=${instId}`;
+                window.location.href = `../Institution/showInstitutionsInfo.html?id=${instId}`;
             } else {
                 console.error('Ugyldigt institutions-ID.');
             }
         },
         editItem(id) {
-            console.log('Received user ID:', id); 
+            console.log('Received user ID:', id);
             if (id) {
-                window.location.href = `updateuser.html?id=${id}`;
+                window.location.href = '../User/updateuser.html?id=' + id;
             } else {
                 console.error('Ugyldigt bruger-ID.');
             }
         },
+                
         editInstitution(inst) {
             this.institution = { ...inst };
-            window.location.href = `editInstitution.html?id=${inst.id}`;
+            window.location.href = `../Institution/editInstitution.html?id=${inst.id}`;
         },
         createParentRelation() {
-            window.location.href = 'createParentRelations.html';
+            window.location.href = '../Parentrelations/createParentRelations.html';
         },
         viewParentRelationDetails(id) {
             const url = `${this.PARENTS_RELATION_API_URL}/${id}`;
             axios.get(url)
                 .then(response => {
                     console.log('Forældre relation hentet:', response.data);
-                    // Gør noget med den hentede data
+                    window.location.href = `../Parentrelations/showRelationInfo.html?id=${id}`;
                 })
                 .catch(error => {
                     console.error('Fejl ved hentning af forældre relation:', error);
@@ -152,7 +169,7 @@ new Vue({
         editParentRelation(id) {
             console.log('Received parent relation ID:', id); 
             if (id) {
-                window.location.href = `editParentRelation.html?id=${id}`;
+                window.location.href = `../Parentrelations/editParentRelation.html?id=${id}`;
             } else {
                 console.error('Ugyldigt forældre-relation-ID.');
             }
@@ -204,6 +221,10 @@ new Vue({
                 default:
                     return 'Forældre';
             }
+        },
+        navigateToAdminRelation() {
+            this.currentSection = 'AdminRelation';
+            this.loadAdminRelations(); // Load admin relations data
         }
     },
     mounted() {

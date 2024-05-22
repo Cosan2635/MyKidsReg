@@ -30,8 +30,7 @@ new Vue({
             }
         },
         goBack() {
-            console.log("Going back to previous page."); // Tilføjet log
-            window.location.href = '../Institutions/institution_dashboard.html'; // Redirect til institutionens dashboard
+            window.history.back();
         }
     },
     mounted() {

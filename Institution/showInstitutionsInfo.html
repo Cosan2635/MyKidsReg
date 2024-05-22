@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="da">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,23 +9,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <link rel="stylesheet" href="../styles.css">
 </head>
-
 <body>
     <div id="app" class="container mt-5">
-        <div class="institution-details-card" v-if="institution">
+        <div class="institution-details-card">
             <h1 class="mb-4">Institution Detaljer</h1>
-            <p><strong>ID:</strong> {{ institution.id }}</p>
-            <p><strong>Navn:</strong> {{ institution.name }}</p>
-            <p><strong>Adresse:</strong> {{ institution.address }}</p>
-            <p><strong>Postnummer:</strong> {{ institution.zip_Code }}</p>
-            <p><strong>Telefonnummer:</strong> {{ institution.tlf_Number }}</p>
+            <div v-if="institution">
+                <p><strong>ID:</strong> {{ institution.id }}</p>
+                <p><strong>Navn:</strong> {{ institution.name }}</p>
+                <p><strong>Adresse:</strong> {{ institution.address }}</p>
+                <p><strong>Postnummer:</strong> {{ institution.zip_Code }}</p>
+                <p><strong>Telefonnummer:</strong> {{ institution.tlf_Number }}</p>
+            </div>
+            <div v-else>
+                <p>Indlæser institutionsoplysninger...</p>
+            </div>
             <button class="btn btn-primary btn-back" @click="goBack">Tilbage</button>
-        </div>
-        <div v-else>
-            <p>Indlæser institutionsoplysninger...</p>
         </div>
     </div>
     <script src="showInstitutionsInfo.js"></script>
 </body>
-
 </html>

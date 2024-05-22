@@ -41,6 +41,10 @@ new Vue({
                 .catch(error => {
                     console.error('Fejl ved sletning af institution:', error);
                 });
+        },
+        goBack() {
+            console.log("Going back to previous page."); // Tilføjet log
+            window.location.href = '../Super_Admin/superadmin.html'; // Redirect til institutionens dashboard
         }
     },
     mounted() {

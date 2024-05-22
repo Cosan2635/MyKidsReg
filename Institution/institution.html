@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="da">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
     <div id="app" class="container-fluid">
         <div class="row">
@@ -22,8 +20,10 @@
                     <h1 class="h2">Institution Sektion</h1>
                     <button class="btn btn-success btn-sm btn-create-institution" @click="createInstitution">Opret
                         Institution</button>
-                </div>
 
+
+                </div>
+ <button class="btn btn-primary btn-back" @click="goBack">Tilbage</button>
                 <!-- Table Section -->
                 <div id="table-section" v-if="currentSection === 'institution'">
                     <div class="table-responsive">
@@ -60,10 +60,15 @@
                         </table>
                     </div>
                 </div>
+              
             </main>
         </div>
+       
     </div>
+    <!-- Inkluder Vue.js biblioteket -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- Inkluder Axios biblioteket -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="institution.js"></script>
 </body>
-
 </html>

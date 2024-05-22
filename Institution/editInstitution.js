@@ -6,8 +6,8 @@ new Vue({
         institution: {
             name: '',
             address: '',
-            zip_code: '',
-            tlf_number: ''
+            zip_Code: '',
+            tlf_Number: ''
         }
     },
     methods: {
@@ -16,19 +16,22 @@ new Vue({
                 axios.put(`${this.API_URL}/${this.institutionId}`, this.institution)
                     .then(response => {
                         console.log('Institution updated successfully:', response.data);
-                        alert('Institutionen er opdateret successfully.');
-                        window.location.href = '../Super_admin/superadmin.html'; // Redirect to the dashboard
+                        //alert('Institutionen er opdateret successfully.');
+                        window.location.href = '../Super_Admin/superadmin.html'; // Retning til superadmin-siden
                     })
                     .catch(error => {
                         console.error('Fejl ved opdatering af institution:', error);
                         alert('Der opstod en fejl ved opdatering af institutionen.');
                     });
             } else {
-                alert('Ingen institution ID angivet.');
+                this.goBack()
+                {
+                    window.history.back();
+                };
             }
         },
         goBack() {
-            window.location.href = '../Institutions/institution_dashboard.html'; // Redirect til institutionens dashboard
+            window.history.back();
         },
         getInstitutionDetails() {
             const urlParams = new URLSearchParams(window.location.search);
