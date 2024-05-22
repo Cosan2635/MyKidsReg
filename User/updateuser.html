@@ -10,51 +10,59 @@
 </head>
 
 <body>
-    <div id="update-user-form" class="container">
-        <div class="row justify-content-center">
+    <div class="container">
+        <div class="row justify-content-center mt-5">
             <div class="col-md-6">
-                <h2 class="mt-5">Opdater Bruger</h2>
-                <form @submit.prevent="updateUser">
+                <h2 class="text-center mb-4">Opdater Bruger</h2>
+                <form id="update-user-form" @submit.prevent="updateUser">
                     <input type="hidden" v-model="userId">
-                    <div class="form-group" style="margin-bottom: 10px;">
+                    <div class="form-group">
                         <label for="username">Brugernavn</label>
-                        <input type="text" class="form-control" id="username" v-model="user.username" required>
+                        <input type="text" class="form-control" id="username" v-model="user.user_Name" required>
                     </div>
-                    <div class="form-group" style="margin-bottom: 10px;">
+                    <div class="form-group">
                         <label for="name">Fornavn</label>
                         <input type="text" class="form-control" id="name" v-model="user.name" required>
                     </div>
-                    <div class="form-group" style="margin-bottom: 10px;">
+                    <div class="form-group">
                         <label for="last_name">Efternavn</label>
                         <input type="text" class="form-control" id="last_name" v-model="user.last_name" required>
                     </div>
-                    <div class="form-group" style="margin-bottom: 10px;">
+                    <div class="form-group">
                         <label for="address">Adresse</label>
                         <input type="text" class="form-control" id="address" v-model="user.address" required>
                     </div>
-                    <div class="form-group" style="margin-bottom: 10px;">
+                    <div class="form-group">
                         <label for="zip_code">Postnummer</label>
                         <input type="text" class="form-control" id="zip_code" v-model="user.zip_code" required>
                     </div>
-                    <div class="form-group" style="margin-bottom: 10px;">
+                    <div class="form-group">
                         <label for="email">E-mail</label>
                         <input type="email" class="form-control" id="email" v-model="user.email" required>
                     </div>
-                    <div class="form-group" style="margin-bottom: 10px;">
+                    <div class="form-group">
                         <label for="tlf_nr">Telefonnummer</label>
                         <input type="text" class="form-control" id="tlf_nr" v-model="user.tlf_nr" required>
                     </div>
-                    <div class="form-group" style="margin-bottom: 10px;">
+                    <div class="form-group">
                         <label for="user_type">BrugerType</label>
-                        <select class="form-control" id="user_type" v-model="user.user_type" required>
-                            <option value="Super-admin">Super-admin</option>
-                            <option value="Admin">Admin</option>
-                            <option value="Pedagogue">Pædagog</option>
-                            <option value="Parent">Forælder</option>
+                        <select class="form-control" id="user_type" v-model="user.usertype" required>
+                            <option value="0">Super-admin</option>
+                            <option value="1">Admin</option>
+                            <option value="2">Forælder</option>
+                            <option value="3">Pædagog</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Opdater Bruger</button>
-                    <button type="button" class="btn btn-secondary btn-block" @click="goBack">Tilbage</button>
+                    <!-- <div class="form-group">
+                        <label for="password">Adgangskode</label>
+                        <input type="password" class="form-control" id="password" v-model="user.password">
+                    </div> -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Opdater Bruger</button>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-secondary btn-block" @click="goBack">Tilbage</button>
+                    </div>
                 </form>
             </div>
         </div>

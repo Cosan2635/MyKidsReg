@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opret Institution</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles.css"> <!-- Brug den korrekte relative sti -->
+</head>
+
+<body>
+    <div id="app" class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="mt-5">Opret Institution</h2>
+                <form @submit.prevent="createInstitution">
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <label for="name">Navn</label>
+                        <input type="text" class="form-control" id="name" v-model="institution.name" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <label for="address">Adresse</label>
+                        <input type="text" class="form-control" id="address" v-model="institution.address" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <label for="zip_code">Postnummer</label>
+                        <input type="number" class="form-control" id="zip_code" v-model="institution.zip_code" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <label for="tlf_number">Telefonnummer</label>
+                        <input type="tel" class="form-control" id="tlf_number" v-model="institution.tlf_number"
+                            required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Opret Institution</button>
+                    <button type="button" class="btn btn-secondary btn-block" @click="goBack">Tilbage</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vue.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+    <!-- Axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Vue.js script -->
+    <script src="createInstitution.js"></script> <!-- Brug den korrekte relative sti -->
+</body>
+
+</html>

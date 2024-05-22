@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bruger Detaljer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app" class="container mt-5">
+        <div class="user-details-card">
+            <h1 class="mb-4">Bruger Detaljer</h1>
+            <div v-if="user">
+                <p><strong>ID:</strong> {{ user.user_Id }}</p>
+                <p><strong>Brugernavn:</strong> {{ user.user_Name }}</p>
+                <p><strong>Navn:</strong> {{ user.name }}</p>
+                <p><strong>Efternavn:</strong> {{ user.last_name }}</p>
+                <p><strong>Type:</strong> {{ userTypeToString(user.usertype) }}</p>
+                <p><strong>Adresse:</strong> {{ user.address }}</p>
+                <p><strong>Postnummer:</strong> {{ user.zip_code }}</p>
+                <p><strong>Email:</strong> {{ user.e_mail }}</p>
+                <p><strong>Mobilnummer:</strong> {{ user.mobil_nr }}</p>
+            </div>
+            <div v-else>
+                <p>Indlæser brugeroplysninger...</p>
+            </div>
+            <button class="btn btn-primary btn-back" @click="goBack">Tilbage</button>
+        </div>
+    </div>
+    <script src="getById.js"></script>
+</body>
+</html>
+

@@ -3,20 +3,19 @@ new Vue({
     data: {
         userId: 0,
         user: {
-            username: '',
+            user_Name: '',
             name: '',
             last_name: '',
             address: '',
             zip_code: '',
             email: '',
             tlf_nr: '',
-            user_type: ''
+            usertype: null
         }
     },
     mounted() {
-        // Få brugerens ID fra URL'en
         this.userId = new URLSearchParams(window.location.search).get('id');
-        console.log('UserId hentet fra URL:', this.userId);  // Log userId for debugging
+        console.log('UserId hentet fra URL:', this.userId);
         if (this.userId) {
             this.loadUserData();
         } else {
@@ -29,16 +28,16 @@ new Vue({
                 axios.get(`http://localhost:5191/api/Users/${this.userId}`)
                     .then(response => {
                         const user = response.data;
-                        console.log('Brugerdata hentet fra API:', user);  // Log brugerdata for debugging
+                        console.log('Brugerdata hentet fra API:', user);
                         this.user = {
-                            username: user.user_Name, // Ensure this matches the API response field
+                            user_Name: user.user_Name,
                             name: user.name,
                             last_name: user.last_name,
                             address: user.address,
                             zip_code: user.zip_code,
-                            email: user.e_mail, // Ensure this matches the API response field
-                            tlf_nr: user.mobil_nr, // Ensure this matches the API response field
-                            user_type: user.usertype // Ensure this matches the API response field
+                            email: user.e_mail,
+                            tlf_nr: user.mobil_nr,
+                            usertype: user.user_type
                         };
                     })
                     .catch(error => {
@@ -49,27 +48,36 @@ new Vue({
         },
         updateUser() {
             const userData = {
-                user_Name: this.user.username,
+                user_Id: parseInt(this.userId, 10),
+                user_Name: this.user.user_Name,
                 name: this.user.name,
                 last_name: this.user.last_name,
                 address: this.user.address,
-                zip_code: this.user.zip_code,
+                zip_code: parseInt(this.user.zip_code, 10),
                 e_mail: this.user.email,
-                mobil_nr: this.user.tlf_nr,
-                usertype: this.user.user_type
+                mobil_nr: parseInt(this.user.tlf_nr, 10),
+                usertype: parseInt(this.user.usertype, 10)
             };
 
-            axios.put(`http://localhost:5191/api/Users/${this.userId}`, userData)
-            .then(response => {
-                alert('Bruger opdateret succesfuldt!');
-                // Redirect til superadmin.html eller en anden side efter opdatering
-                window.location.href = 'superadmin.html';
-            })
-            .catch(error => {
-                console.error('Fejl ved opdatering af bruger:', error);
-                alert('Der opstod en fejl. Prøv igen.');
-            });
-    }
-}
-});
+            console.log('Data der sendes til API:', JSON.stringify(userData, null, 2));
 
+            axios.put(`http://localhost:5191/api/Users/${this.userId}`, userData)
+                .then(response => {
+                    alert('Bruger opdateret succesfuldt!');
+                    window.location.href = 'superadmin.html';
+                })
+                .catch(error => {
+                    console.error('Fejl ved opdatering af bruger:', error);
+                    if (error.response && error.response.data) {
+                        console.error('Fejldata fra serveren:', error.response.data);
+                        alert('Fejl: ' + JSON.stringify(error.response.data.errors));
+                    } else {
+                        alert('Der opstod en fejl. Prøv igen.');
+                    }
+                });
+        },
+        goBack() {
+            window.history.back();
+        }
+    }
+});

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opret Forældrerelation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app" class="container mt-5">
+        <h1>Opret Forældrerelation</h1>
+        <form @submit.prevent="createParentRelation">
+            <div class="form-group">
+                <label for="user">Vælg Bruger</label>
+                <select v-model="parentRelation.user_id" class="form-control" required>
+                    <option v-for="user in users" :value="user.user_Id">{{ user.name }} {{ user.last_name }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="student">Vælg Studerende</label>
+                <select v-model="parentRelation.student_id" class="form-control" required>
+                    <option v-for="student in students" :value="student.id">{{ student.name }}</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Opret Relation</button>
+            <button type="button" @click="goBack" class="btn btn-secondary">Tilbage</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="createParentRelations.js"></script>
+</body>
+</html>

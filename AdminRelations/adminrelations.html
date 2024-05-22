@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin & Institution Administration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="app" class="container-fluid">
+        <div class="row">
+            <!-- Sidebar (kan kopieres fra superadmin.html hvis den er ens for alle sider) -->
+
+            <!-- Main content -->
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 main-content">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Admin & Institution Administration</h1>
+                </div>
+
+                <!-- Table Section -->
+                <div id="table-section" v-if="currentSection === 'AdminRelations'">
+                    <div class="table-responsive">
+                        <table id="admin-relations-data-table" class="table table-striped table-sm">
+                            <!-- Table data goes here -->
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="adminrelations.js"></script>
+</body>
+
+</html>
