@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Side</title>
+    <title>Super-admin side</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
@@ -21,10 +21,7 @@
                     <h2 class="h4 p-3">Dashboard</h2>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#" @click="loadTableData('student')">Studerende</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../Admin/Department/department.html">Afdeling</a>
+                            <a class="nav-link active" href="../admin.html">Tilbage til Dashboard</a>
                         </li>
                     </ul>
                 </div>
@@ -35,46 +32,33 @@
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">{{ tableTitle }}</h1>
-                    <button class="btn btn-success btn-sm" @click="createEntity">
-                        <i class="fas fa-plus-circle"></i> Opret Student
-                    </button>
+                    <button class="btn btn-success btn-sm" @click="createDepartment">Opret Afdeling</button>
                 </div>
 
-                <!-- Table Section -->
-                <div id="table-section">
+                <!-- Department Section -->
+                <div id="department-section">
                     <div class="table-responsive">
                         <table id="data-table" class="table table-striped table-sm">
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Navn</th>
-                                    <th>Efternavn</th>
-                                    <th>Fødselsdag</th>
                                     <th class="text-right">Handlinger</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="item in tableData" :key="item.id">
-                                    <td>{{ item.id }}</td>
-                                    <td>{{ item.name }}</td>
-                                    <td>{{ item.last_name }}</td>
-                                    <td>{{ item.birthday }}</td>
+                                <tr v-for="department in departments" :key="department.id">
+                                    <td>{{ department.id }}</td>
+                                    <td>{{ department.name }}</td>
                                     <td class="text-right">
-                                        <button class="btn btn-info btn-sm" title="Vis detaljer"
-                                            @click="viewDetails(item.id)">
-                                            <i class="fas fa-info-circle"></i>
-                                        </button>
-                                        <button class="btn btn-warning btn-sm" title="Opdater"
-                                            @click="editItem(item.id)">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm" title="Slet" @click="deleteItem(item.id)">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                        <button class="btn btn-success btn-sm" title="Tilføj til afdeling"
-                                            @click="assignToDepartment(item.id)">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
+                                        <button class="btn btn-info btn-sm" title="GetById"
+                                            @click="viewDepartmentDetails(department.id)"><i
+                                                class="fas fa-info-circle"></i></button>
+                                        <button class="btn btn-warning btn-sm" title="Update"
+                                            @click="editDepartment(department.id)"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-danger btn-sm" title="Slet"
+                                            @click="deleteDepartment(department.id)"><i
+                                                class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -84,7 +68,7 @@
             </main>
         </div>
     </div>
-    <script src="admin.js"></script>
+    <script src="department.js"></script>
 </body>
 
 </html>

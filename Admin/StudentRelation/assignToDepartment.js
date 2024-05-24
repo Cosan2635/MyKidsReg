@@ -2,7 +2,8 @@ new Vue({
     el: '#app',
     data: {
         studentId: null,
-        departmentId: ''
+        departmentId: '',
+        departments: []
     },
     methods: {
         assignStudentToDepartment() {
@@ -23,10 +24,21 @@ new Vue({
         },
         goBack() {
             window.location.href = 'admin.html';
+        },
+        fetchDepartments() {
+            // Hent afdelinger
+            axios.get('http://localhost:5191/api/departments')
+                .then(response => {
+                    this.departments = response.data;
+                })
+                .catch(error => {
+                    console.error('Fejl ved hentning af afdelinger:', error);
+                });
         }
     },
     mounted() {
         const urlParams = new URLSearchParams(window.location.search);
         this.studentId = urlParams.get('id');
+        this.fetchDepartments();
     }
 });

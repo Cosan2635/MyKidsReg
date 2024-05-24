@@ -20,8 +20,11 @@
                 <input type="text" class="form-control" id="studentId" v-model="studentId" readonly>
             </div>
             <div class="form-group">
-                <label for="departmentId">Afdeling ID</label>
-                <input type="text" class="form-control" id="departmentId" v-model="departmentId" required>
+                <label for="departmentId">Afdeling</label>
+                <select class="form-control" id="departmentId" v-model="departmentId" required>
+                    <option value="">Vælg afdeling</option>
+                    <option v-for="department in departments" :value="department.id">{{ department.name }}</option>
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Tilføj</button>
             <button type="button" class="btn btn-secondary" @click="goBack">Tilbage</button>

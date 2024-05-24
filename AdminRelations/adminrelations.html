@@ -1,52 +1,58 @@
 <!DOCTYPE html>
 <html lang="da">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Relation Administration</title>
+    <title>Admin Relations</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 </head>
-
 <body>
     <div id="app" class="container-fluid">
         <div class="row">
-            <!-- Sidebar -->
+            <!-- Sidebar (kan kopieres fra superadmin.html hvis den er ens for alle sider) -->
 
             <!-- Main content -->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 main-content">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">{{ tableTitle }}</h1>
+                    <button class="btn btn-success btn-sm" @click="createAdminRelation">Opret Admin Relation</button>
                 </div>
-
+                <button class="btn btn-primary btn-back" @click="goBack">Tilbage</button>
                 <!-- Table Section -->
-                <div id="table-section" v-if="currentSection === 'AdminRelation'">
+                <div id="table-section">
                     <div class="table-responsive">
                         <table id="admin-relation-data-table" class="table table-striped table-sm">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>User ID</th>
-                                    <th>Institution ID</th>
+                                    <th>Admins navn</th>
+                                    <th>Institutionsnavn</th>
+                                    <th class="text-right">Handlinger</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="item in tableData" :key="item.id">
+                                <tr v-for="item in adminRelations" :key="item.id">
                                     <td>{{ item.id }}</td>
-                                    <td>{{ item.user_Id }}</td>
-                                    <td>{{ item.institution_Id }}</td>
+                                    <td>{{ getUsernameById(item.user_Id) }}</td>
+                                    <td>{{ getInstitutionNameById(item.institution_Id) }}</td>
+                                    <td class="text-right">
+                                        <button class="btn btn-info btn-sm" title="GetById" @click="viewAdminRelationDetails(item.id)"><i class="fas fa-info-circle"></i></button>
+                                        <button class="btn btn-warning btn-sm" title="Update" @click="editAdminRelation(item.id)"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-danger btn-sm" title="Slet" @click="deleteAdminRelation(item.id)"><i class="fas fa-trash-alt"></i></button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </main>
+            
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-    <script src="adminrelation.js"></script>
+    <script src="adminrelations.js"></script>
 </body>
-
 </html>

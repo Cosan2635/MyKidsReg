@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Detaljer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="app" class="container">
+        <h1 class="mt-5">Student Detaljer</h1>
+        <div v-if="Object.keys(selectedStudent).length !== 0">
+            <p><strong>Student ID:</strong> {{ selectedStudent.id }}</p>
+            <p><strong>Navn:</strong> {{ selectedStudent.name }}</p>
+            <p><strong>Efternavn:</strong> {{ selectedStudent.last_name }}</p>
+            <!-- Tilføj flere oplysninger om studenten her -->
+        </div>
+        <button type="button" class="btn btn-secondary" @click="goBack">Tilbage</button>
+    </div>
+    <script src="viewstudentdetails.js"></script>
+</body>
+
+</html>

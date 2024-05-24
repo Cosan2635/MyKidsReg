@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afdeling Detaljer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <div id="app" class="container mt-5">
+        <div class="department-details-card">
+            <h1 class="mb-4">Afdeling Detaljer</h1>
+            <div v-if="department">
+                <p><strong>ID:</strong> {{ department.id }}</p>
+                <p><strong>Navn:</strong> {{ department.name }}</p>
+            </div>
+            <div v-else>
+                <p>Indlæser afdelingsoplysninger...</p>
+            </div>
+            <button class="btn btn-primary btn-back" @click="goBack">Tilbage</button>
+        </div>
+    </div>
+    <script src="viewdepartmentdetails.js"></script>
+</body>
+
+</html>

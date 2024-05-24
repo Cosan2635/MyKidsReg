@@ -34,7 +34,7 @@ new Vue({
             axios.post(this.PARENTS_RELATION_API_URL, this.parentRelation)
                 .then(response => {
                     console.log('Forældrerelation oprettet:', response.data);
-                    window.location.href = 'index.html'; // Tilbage til hovedsiden eller en anden passende side
+                    window.location.href = '../Parentrelations/parentrelation.html'; // Tilbage til hovedsiden eller en anden passende side
                 })
                 .catch(error => {
                     console.error('Fejl ved oprettelse af forældrerelation:', error);

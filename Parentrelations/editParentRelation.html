@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rediger Forældrerelation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app" class="container">
+        <div v-if="dataLoaded"> <!-- Betinget visning af formularen -->
+            <h1 class="mt-5">{{ formTitle }}</h1>
+            <form @submit.prevent="updateParentRelation">
+                <div class="form-group">
+                    <label for="student_id">Barnets Navn</label>
+                    <select id="student_id" class="form-control" v-model="parentRelation.student_id">
+                        <option v-for="student in students" :key="student.id" :value="student.id">{{ student.name }}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="user_id">Forældre Navn</label>
+                    <select id="user_id" class="form-control" v-model="parentRelation.user_id">
+                        <option v-for="user in users" :key="user.user_Id" :value="user.user_Id">{{ user.name }}</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Opdater</button>
+                <button type="button" class="btn btn-secondary" @click="cancelEdit">Annuller</button>
+            </form>
+        </div>
+        <div v-else>
+            Loading... <!-- Viser en loading besked mens data indlæses -->
+        </div>
+    </div>
+    <script src="editparentsrelation.js"></script>
+</body>
+
+</html>

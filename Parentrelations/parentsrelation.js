@@ -2,19 +2,54 @@ new Vue({
     el: '#app',
     data: {
         PARENTS_RELATION_API_URL: 'http://localhost:5191/api/ParentRelations',
+        STUDENT_API_URL: 'http://localhost:5191/api/Student',
+        USER_API_URL: 'http://localhost:5191/api/Users',
         tableTitle: 'Forældre- og Studerenderelationer',
-        currentSection: 'ParentsRelation',
-        parentRelations: [] // Tilføjet til at gemme forældrerelationer
+        parentRelations: [],
+        users: [],
+        students: []
     },
     methods: {
         loadParentRelations() {
             axios.get(this.PARENTS_RELATION_API_URL)
                 .then(response => {
                     this.parentRelations = response.data;
+                    this.loadUsers();
+                    this.loadStudents();
                 })
                 .catch(error => {
                     console.error('Fejl ved indlæsning af forældre relationer:', error);
                 });
+        },
+        loadUsers() {
+            axios.get(this.USER_API_URL)
+                .then(response => {
+                    this.users = response.data;
+                })
+                .catch(error => {
+                    console.error('Fejl ved hentning af brugere:', error);
+                });
+        },
+        loadStudents() {
+            axios.get(this.STUDENT_API_URL)
+                .then(response => {
+                    this.students = response.data;
+                })
+                .catch(error => {
+                    console.error('Fejl ved hentning af studerende:', error);
+                });
+        },
+        getUsernameById(userId) {
+            const user = this.users.find(user => user.user_Id === userId);
+            return user ? user.name : 'Ukendt bruger';
+        },
+        getLastNameById(userId) {
+            const user = this.users.find(user => user.user_Id === userId);
+            return user ? user.last_name : 'Ukendt bruger';
+        },
+        getStudentNameById(studentId) {
+            const student = this.students.find(student => student.id === studentId);
+            return student ? student.name : 'Ukendt studerende';
         },
         createParentRelation() {
             window.location.href = '../Parentrelations/createParentRelations.html';
@@ -30,17 +65,17 @@ new Vue({
                     console.error('Fejl ved hentning af forældre relation:', error);
                 });
         },
-        editParentRelation(id) {
-            console.log('Received parent relation ID:', id); 
-            if (id) {
-                window.location.href = `../Parentrelations/editParentRelation.html?id=${id}`;
-            } else {
-                console.error('Ugyldigt forældre-relation-ID.');
-            }
-        },
+        // editParentRelation(id) {
+        //     console.log('Received parent relation ID:', id);
+        //     if (id) {
+        //         window.location.href = `../Parentrelations/editParentRelation.html?id=${id}`;
+        //     } else {
+        //         console.error('Ugyldigt forældre-relation-ID.');
+        //     }
+        // },
         deleteParentRelation(id) {
-            const url = `${this.PARENTS_RELATION_API_URL}/${id}`; 
-            console.log('Sletning af forældre relation med ID:', id, 'URL:', url); 
+            const url = `${this.PARENTS_RELATION_API_URL}/${id}`;
+            console.log('Sletning af forældre relation med ID:', id, 'URL:', url);
             axios.delete(url)
                 .then(response => {
                     console.log('Forældre relation slettet:', response.data);
@@ -49,9 +84,13 @@ new Vue({
                 .catch(error => {
                     console.error('Fejl ved sletning af forældre relation:', error);
                 });
+        },
+        goBack()
+        {
+window.location.href ='../Super_Admin/superadmin.html'
         }
     },
     mounted() {
-        this.loadParentRelations(); // Indlæs forældrerelationer ved montering af komponenten
+        this.loadParentRelations();
     }
 });

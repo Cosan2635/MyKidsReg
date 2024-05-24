@@ -73,7 +73,7 @@ new Vue({
                 });
         },
         goBack: function() {
-            window.location.href = 'superadmin.html'; // Går til superadmin.html
+            window.history.back();
         }
     }
 });

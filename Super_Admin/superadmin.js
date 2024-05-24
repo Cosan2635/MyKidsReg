@@ -2,14 +2,13 @@ new Vue({
     el: '#app',
     data: {
         API_URL: 'http://localhost:5191/api/Users',
-        STUDENT_API_URL: 'http://localhost:5191/api/Student', // Tilføjet URL til Students API
+       
         INSTITUTION_API_URL: 'http://localhost:5191/api/Institution',
-        PARENTS_RELATION_API_URL: 'http://localhost:5191/api/ParentRelations', 
+       
         tableTitle: 'Bruger Sektion',
         tableData: [],
         institutions: [],
-        users: [], // Tilføjet til at gemme brugere
-        students: [], // Tilføjet til at gemme studerende
+      
         currentSection: 'bruger',
         user_Id: 0,
         institution: {
@@ -57,62 +56,6 @@ new Vue({
                 })
                 .catch(error => {
                     console.error('Fejl ved hentning af institutioner:', error);
-                });
-        },
-        loadParentsRelations() {
-            axios.get(this.PARENTS_RELATION_API_URL)
-                .then(response => {
-                    this.tableData = response.data;
-                    this.tableTitle = 'Forældre og Studerende Relationer';
-                    this.loadUsers(); // Tilføjet for at hente brugere
-                    this.loadStudents(); // Tilføjet for at hente studerende
-                })
-                .catch(error => {
-                    console.error('Fejl ved indlæsning af forældre relationer:', error);
-                });
-        },
-        loadUsers() {
-            axios.get(this.API_URL)
-                .then(response => {
-                    this.users = response.data;
-                })
-                .catch(error => {
-                    console.error('Fejl ved hentning af brugere:', error);
-                });
-        },
-        loadStudents() {
-            axios.get(this.STUDENT_API_URL)
-                .then(response => {
-                    this.students = response.data;
-                })
-                .catch(error => {
-                    console.error('Fejl ved hentning af studerende:', error);
-                });
-        },
-        
-        getUsernameById(userId) {
-            const user = this.users.find(user => user.user_Id === userId);
-            return user ? user.name  : 'Ukendt bruger';            
-        },
-
-        getLastNameById(userId) {
-            const user = this.users.find(user => user.user_Id === userId);
-            return user ? user.last_name : 'Ukendt bruger';            
-        },
-
-        getStudentNameById(studentId) {
-            const student = this.students.find(student => student.id === studentId);
-            return student ? student.name : 'Ukendt studerende';
-        },
-        loadAdminRelations() {
-            axios.get(this.ADMIN_RELATION_API_URL)
-                .then(response => {
-                    this.tableData = response.data;
-                    this.tableTitle = 'Admin og Institution Relationer';
-                    // Additional logic if needed
-                })
-                .catch(error => {
-                    console.error('Fejl ved indlæsning af admin relationer:', error);
                 });
         },
         

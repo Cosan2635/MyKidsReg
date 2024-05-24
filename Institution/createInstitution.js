@@ -14,7 +14,7 @@ new Vue({
             axios.post(this.INSTITUTION_API_URL, this.institution)
                 .then(response => {
                     console.log('Institution oprettet:', response.data);
-                    window.location.href = '../Super_admin/superadmin.html'; // Redirect til dashboardet
+                    window.location.href = '../Institution/institution.html'; // Redirect til dashboardet
                 })
                 .catch(error => {
                     console.error('Fejl ved oprettelse af institution:', error);
@@ -22,7 +22,7 @@ new Vue({
                 });
         },
         goBack() {
-            window.location.href = '../Institutions/institution_dashboard.html'; // Redirect til institutionens dashboard
+            window.location.href = '../Institution/institution.html'; // Redirect til institutionens dashboard
         }
     }
 });

@@ -17,7 +17,7 @@ new Vue({
                     .then(response => {
                         console.log('Institution updated successfully:', response.data);
                         //alert('Institutionen er opdateret successfully.');
-                        window.location.href = '../Super_Admin/superadmin.html'; // Retning til superadmin-siden
+                        window.location.href = '../Institution/institution.html';// Retning til superadmin-siden
                     })
                     .catch(error => {
                         console.error('Fejl ved opdatering af institution:', error);

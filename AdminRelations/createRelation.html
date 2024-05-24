@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Admin Relation</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="styles.css"> <!-- Link til din CSS-fil -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #d3f6f0, #acb6e5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        #app {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label {
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 600;
+        }
+        select {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 300px;
+            transition: border-color 0.3s;
+        }
+        select:focus {
+            border-color: #007bff;
+        }
+        button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 0.5rem;
+            width: 100%;
+            max-width: 300px;
+        }
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+        }
+        button[type="button"] {
+            background-color: #6c757d;
+            color: #fff;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        button[type="button"]:hover {
+            background-color: #5a6268;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>Create Admin Relation</h1>
+        <form @submit.prevent="createAdminRelation">
+            <div>
+                <label for="user">Select Admin User:</label>
+                <select v-model="selectedUser" id="user">
+                    <option v-for="user in users" :key="user.user_Id" :value="user.user_Id">{{ user.name }}</option>
+                </select>
+            </div>
+            <div>
+                <label for="institution">Select Institution:</label>
+                <select v-model="selectedInstitution" id="institution">
+                    <option v-for="institution in institutions" :key="institution.id" :value="institution.id">{{ institution.name }}</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit">Create</button>
+                <button type="button" @click="goBack">Cancel</button>
+            </div>
+        </form>
+    </div>
+    <script src="createRelation.js"></script>
+</body>
+</html>

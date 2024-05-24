@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Relation Administration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+</head>
+<body>
+    <div id="app" class="container mt-5">
+        <div class="user-details-card">
+            <h1 class="mb-4">Admin Relation Detaljer</h1>
+
+            <!-- Admin Relation Details Section -->
+            <div>
+                <div class="user-details-card">
+                    <div v-if="adminRelation">
+                        <!-- <p><strong>ID:</strong> {{ adminRelation.id }}</p> -->
+                        <p>ID: {{ adminRelation.id }}</p>
+                        <!-- Dropdown for selecting user -->
+                        <div class="form-group">
+                            <label for="userSelect">Bruger:</label>
+                            <select id="userSelect" class="form-control" v-model="adminRelation.user_Id">
+                                <option v-for="user in users" :key="user.user_Id" :value="user.user_Id">{{ user.name }}</option>
+                            </select>
+                        </div>
+                        <!-- Dropdown for selecting institution -->
+                        <div class="form-group">
+                            <label for="institutionSelect">Institution:</label>
+                            <select id="institutionSelect" class="form-control" v-model="adminRelation.institution_Id">
+                                <option v-for="institution in institutions" :key="institution.id" :value="institution.id">{{ institution.name }}</option>
+                            </select>
+                        </div>
+                        <!-- Add more fields as needed -->
+                    </div>
+                    <div v-else>
+                        <p>Indlæser detaljer...</p>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-back mt-3" @click="goBack">Tilbage</button>
+            <a class="btn btn-primary btn-edit mt-3" :href="'editAdminRelation.html?id=' + adminRelation.id">Rediger</a>
+        </div>
+    </div>
+    <script src="editAdminRelation.js"></script>
+</body>
+</html>
