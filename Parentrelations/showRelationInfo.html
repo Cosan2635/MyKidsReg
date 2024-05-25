@@ -17,17 +17,15 @@
             <!-- Parent Relation Details Section -->
             <div>
                 <div class="user-details-card">
-                    
-                    <div v-if="selectedParentRelation">
-                        <p><strong>ID:</strong> {{ selectedParentRelation.id }}</p>
-                        <p><strong>Barnets Navn:</strong> {{ getStudentNameById(selectedParentRelation.student_id) }}</p>
-                        <p><strong>Forældre Navn:</strong> {{ getUsernameById(selectedParentRelation.user_id) }}</p>
-                        <p><strong>Efternavn:</strong> {{ getLastNameById(selectedParentRelation.user_id) }}</p>
+                    <div v-if="selectedStudent.id">
+                        <p><strong>ID:</strong> {{ selectedStudent.id }}</p>
+                        <p><strong>Barnets Navn:</strong> {{ getStudentNameById(selectedStudent.studentId) }}</p>
+                        <p><strong>Forældre Navn:</strong> {{ getUsernameById(selectedStudent.user_id) }}</p>
+                        <p><strong>Efternavn:</strong> {{ getLastNameById(selectedStudent.user_id) }}</p>
                     </div>
                     <div v-else>
                         <p>Indlæser detaljer...</p>
                     </div>
-                    <!-- <button class="btn btn-primary btn-back mt-3" @click="goBack">Tilbage til Liste</button> -->
                 </div>
             </div>
 

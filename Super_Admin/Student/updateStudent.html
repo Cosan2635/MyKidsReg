@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Student</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../new_styles.css">
+</head>
+
+<body>
+    <div id="app" class="container mt-5">
+        <h1 class="mb-4">Update Student</h1>
+        <div v-if="errorLoadingDetails" class="alert alert-danger" role="alert">
+            Error loading student details. Please try again later.
+        </div>
+        <form @submit.prevent="updateStudent">
+            <div class="form-group">
+                <label for="studentId">Student ID:</label>
+                <input type="text" class="form-control" id="studentId" v-model="studentId" readonly>
+            </div>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" v-model="updatedStudent.name" required>
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name:</label>
+                <input type="text" class="form-control" id="lastname" v-model="updatedStudent.last_name" required>
+            </div>
+            <div class="form-group">
+                <label for="birthday">Birthday:</label>
+                <input type="date" class="form-control" id="birthday" v-model="updatedStudent.birthday" required>
+            </div>
+            <div class="form-group">
+                <label for="departmentId">Department ID:</label>
+                <input type="number" class="form-control" id="departmentId" v-model="updatedStudent.department_id" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Student</button>
+            <button type="button" class="btn btn-secondary" @click="goBack">Back</button>
+        </form>
+    </div>
+
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Your updatestudent.js file -->
+    <script src="updateStudent.js"></script>
+
+</body>
+
+</html>

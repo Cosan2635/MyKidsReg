@@ -2,7 +2,6 @@ new Vue({
     el: '#app',
     data: {
         STUDENT_API_URL: 'http://localhost:5191/api/Student',
-        studentId: null,
         student: null,
     },
     methods: {
