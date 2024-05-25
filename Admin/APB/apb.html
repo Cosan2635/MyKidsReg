@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pædagog Afdeling Student</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../new_styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app" class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <h2 class="h4 p-3">Dashboard</h2>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="../admin.html">Tilbage til Dashboard</a>
+                        </li>
+                    </ul>
+                </div>
+               
+            </nav>
+            <!-- Main content -->
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 main-content">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">{{ tableTitle }}</h1>
+                    <button class="btn btn-primary" @click=" createRelation">Opret Ny Relation</button>
+                </div>
+               
+                <div id="table-section">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Afdeling</th>
+                                    <th>Pædagog</th>
+                                    <th>Student</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="relation in relations" :key="relation.id">
+                                    <td>{{ relation.id }}</td>
+                                    <td>{{ relation.departmentName }}</td>
+                                    <td>{{ relation.teacherName }}</td>
+                                    <td>{{ relation.studentName }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div>
+              
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="apb.js"></script>
+</body>
+
+</html>

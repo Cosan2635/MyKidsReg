@@ -16,7 +16,7 @@ new Vue({
             axios.post(url, assignmentData)
                 .then(response => {
                     console.log('Student tildelt til afdeling:', response.data);
-                    window.location.href = 'admin.html';
+                    window.location.href = '../admin.html';
                 })
                 .catch(error => {
                     console.error('Fejl ved tildeling af student til afdeling:', error);

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rediger Afdeling</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app" class="container mt-5">
+        <h1>Rediger Afdeling</h1>
+        <form @submit.prevent="updateDepartment">
+            <div class="form-group">
+                <label for="name">Navn</label>
+                <input type="text" class="form-control" v-model="departmentData.name" required>
+            </div>
+            <div class="form-group">
+                <label for="institution">Institution</label>
+                <select class="form-control" v-model="departmentData.institution_Id" required>
+                    <option v-for="institution in institutions" :key="institution.id" :value="institution.id">
+                        {{ institution.name }}
+                    </option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Opdater Afdeling</button>
+            <button type="button" @click="goBack" class="btn btn-secondary">Tilbage</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="editdepartment.js"></script>
+</body>
+</html>

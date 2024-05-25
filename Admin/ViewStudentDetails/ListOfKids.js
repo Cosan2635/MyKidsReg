@@ -51,33 +51,31 @@ new Vue({
             const student = this.students.find(student => student.id === studentId);
             return student ? student.name : 'Ukendt studerende';
         },
-        // getAddressById(userId) {
-        //     console.log('Finding user by ID:', userId);
-        //     const user = this.users.find(user => user.user_Id === userId);
-        //     console.log('Found user:', user);
-        //     return user ? user.address : 'Ukendt bruger';
-        // },
-        // getZip_CodeById(userId) {
-        //     console.log('Finding user by ID:', userId);
-        //     const user = this.users.find(user => user.user_Id === userId);
-        //     console.log('Found user:', user);
-        //     return user ? user.zip_code : 'Ukendt bruger';
-        // },
-        // getE_mailById(userId) {
-        //     console.log('Finding user by ID:', userId);
-        //     const user = this.users.find(user => user.user_Id === userId);
-        //     console.log('Found user:', user);
-        //     return user ? user.e_mail : 'Ukendt bruger';
-        // },
-        // getMobilNumberById(userId) {
-        //     console.log('Finding user by ID:', userId);
-        //     const user = this.users.find(user => user.user_Id === userId);
-        //     console.log('Found user:', user);
-        //     return user ? user.mobil_nr : 'Ukendt bruger';
-        // },
-        createParentRelation() {
-            window.location.href = '../Parentrelations/createParentRelations.html';
+        getAddressById(userId) {
+            console.log('Finding user by ID:', userId);
+            const user = this.users.find(user => user.user_Id === userId);
+            console.log('Found user:', user);
+            return user ? user.address : 'Ukendt bruger';
         },
+        getZip_CodeById(userId) {
+            console.log('Finding user by ID:', userId);
+            const user = this.users.find(user => user.user_Id === userId);
+            console.log('Found user:', user);
+            return user ? user.zip_code : 'Ukendt bruger';
+        },
+        getE_mailById(userId) {
+            console.log('Finding user by ID:', userId);
+            const user = this.users.find(user => user.user_Id === userId);
+            console.log('Found user:', user);
+            return user ? user.e_mail : 'Ukendt bruger';
+        },
+        getMobilNumberById(userId) {
+            console.log('Finding user by ID:', userId);
+            const user = this.users.find(user => user.user_Id === userId);
+            console.log('Found user:', user);
+            return user ? user.mobil_nr : 'Ukendt bruger';
+        },
+        
         viewParentRelationDetails(id) {
             const url = `${this.PARENTS_RELATION_API_URL}/${id}`;
             axios.get(url)
@@ -89,29 +87,11 @@ new Vue({
                     console.error('Fejl ved hentning af forældre relation:', error);
                 });
         },
-        // editParentRelation(id) {
-        //     console.log('Received parent relation ID:', id);
-        //     if (id) {
-        //         window.location.href = `../Parentrelations/editParentRelation.html?id=${id}`;
-        //     } else {
-        //         console.error('Ugyldigt forældre-relation-ID.');
-        //     }
-        // },
-        deleteParentRelation(id) {
-            const url = `${this.PARENTS_RELATION_API_URL}/${id}`;
-            console.log('Sletning af forældre relation med ID:', id, 'URL:', url);
-            axios.delete(url)
-                .then(response => {
-                    console.log('Forældre relation slettet:', response.data);
-                    this.loadParentRelations(); // Opdater forældrerelationer efter sletning
-                })
-                .catch(error => {
-                    console.error('Fejl ved sletning af forældre relation:', error);
-                });
-        },
+    
+        
         goBack()
         {
-window.location.href ='../Super_Admin/superadmin.html'
+window.location.href ='../admin.html'
         }
     },
     mounted() {

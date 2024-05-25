@@ -7,7 +7,7 @@
     <title>Parents Relation Administration</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../new_styles.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 </head>
@@ -16,16 +16,25 @@
     <div id="app" class="container-fluid">
         <div class="row">
             <!-- Sidebar (kan kopieres fra superadmin.html hvis den er ens for alle sider) -->
-
+            <nav id="sidebar" class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <h2 class="h4 p-3">Dashboard</h2>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="../admin.html">Tilbage til Dashboard</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
             <!-- Main content -->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 main-content">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">{{ tableTitle }}</h1>
-                    <button class="btn btn-success btn-sm btn-create-parent-relation"
-                        @click="createParentRelation">Opret Forældrerelation</button>
-                </div>
-                <button class="btn btn-primary btn-back" @click="goBack">Tilbage</button>
+                     <!-- <button class="btn btn-success btn-sm btn-create-parent-relation"
+                        @click="createParentRelation">Opret Forældrerelation</button> -->
+                </div> 
+              
                 <!-- Table Section -->
                 <div id="table-section">
                     <div class="table-responsive">
@@ -36,12 +45,12 @@
                                     <th>Barnets Navn</th>
                                     <th>Forældre Navn</th>
                                     <th>Efternavn</th>
-                                    <!-- <th>Addresse</th>
+                                    <th>Addresse</th>
                                     <th>PostNr</th>
                                     <th>Email</th>
-                                    <th>Mobil</th> -->
+                                    <th>Mobil</th>
                                     
-                                    <th class="text-right">Handlinger</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,16 +59,12 @@
                                     <td>{{ getStudentNameById(item.student_id) }}</td>
                                     <td>{{ getUsernameById(item.user_id) }}</td>
                                     <td>{{ getLastNameById(item.user_id) }}</td>
-                                    <!-- <td>{{ getAddressById(item.student_id) }}</td>
+                                    <td>{{ getAddressById(item.student_id) }}</td>
                                     <td>{{ getZip_CodeById(item.user_id) }}</td>
                                     <td>{{ getE_mailById(item.user_id) }}</td>
-                                    <td>{{ getMobilNumberById(item.user_id) }}</td> -->
+                                    <td>{{ getMobilNumberById(item.user_id) }}</td>
                                     
-                                    <td class="text-right">
-                                        <button class="btn btn-info btn-sm" title="GetById" @click="viewParentRelationDetails(item.id)"><i class="fas fa-info-circle"></i></button>
-                                        <!-- <button class="btn btn-warning btn-sm" title="Update" @click="editParentRelation(item.id)"><i class="fas fa-edit"></i></button> -->
-                                        <button class="btn btn-danger btn-sm" title="Slet" @click="deleteParentRelation(item.id)"><i class="fas fa-trash-alt"></i></button>
-                                    </td>
+                                    
                                 </tr>
                             </tbody>
                         </table>
@@ -68,7 +73,7 @@
             </main>
         </div>
     </div>
-    <script src="parentsrelation.js"></script>
+    <script src="ListOfKids.js"></script>
 </body>
 
 </html>

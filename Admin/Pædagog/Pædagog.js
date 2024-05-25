@@ -2,27 +2,24 @@ new Vue({
     el: '#app',
     data: {
         API_URL: 'http://localhost:5191/api/Users',
-        tableTitle: 'Bruger Sektion',
+        tableTitle: 'Pædagoge Sektion',
         tableData: [],
-        users: [],
-        currentSection: 'bruger',
+        currentSection: 'pædagog',
         user_Id: 0
     },
     methods: {
         loadTableData() {
-            const url = `${this.API_URL}`;
+            const url = this.API_URL;
             console.log('Loading data from URL:', url);
             axios.get(url)
                 .then(response => {
                     console.log('Data loaded:', response.data);
-                    this.tableData = response.data;
+                    // Filtrerer kun brugere med userType = Pædagoge
+                    this.tableData = response.data.filter(user => user.usertype === 2); // Brug det korrekte attributnavn her
                 })
                 .catch(error => {
                     console.error('Fejl ved indlæsning af data:', error);
                 });
-        },
-        createUser() {
-            window.location.href = 'createUser.html';
         },
         viewUserDetails(user_Id) {
             if (user_Id != null) {
@@ -61,10 +58,12 @@ new Vue({
                 case 2:
                     return 'Pædagoge';
                 case 3:
-                        return 'Forældre';
+                    return 'Forældre';
                 default:
                     return 'Ukendt';
             }
+        },goBack(){
+            window.location.href=`../admin.html`
         }
     },
     mounted() {

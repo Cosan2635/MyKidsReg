@@ -63,8 +63,8 @@ new Vue({
 
             axios.put(`http://localhost:5191/api/Users/${this.userId}`, userData)
                 .then(response => {
-                    alert('Bruger opdateret succesfuldt!');
-                    window.location.href = 'superadmin.html';
+                    
+                    window.location.href = '../Super_Admin/superadmin.html';
                 })
                 .catch(error => {
                     console.error('Fejl ved opdatering af bruger:', error);

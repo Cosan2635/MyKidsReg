@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pædagoge Sektion</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Inkluder de samme CSS-stilarter som brugt i listofkids.html -->
+    <link rel="stylesheet" href="../new_styles.css">
+</head>
+
+<body>
+
+    <div id="app" class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <h2 class="h4 p-3">Dashboard</h2>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="../admin.html">Tilbage til Dashboard</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+           
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 main-content">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">{{ tableTitle }}</h1>
+                    
+                </div>
+
+                <div id="table-section">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Navn</th>
+                                <th>Last_Name</th>
+                                <th>Email</th>
+                                <th>Adresse</th>
+                                <th>Mobil nummer</th>
+                                <th>Brugertype</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="user in tableData" :key="user.user_Id">
+                                <td>{{ user.user_Id }}</td>
+                                <td>{{ user.name }}</td>
+                                <td>{{user.last_name}}</td>
+                                <td>{{ user.e_mail }}</td>
+                                <td>{{user.address}}</td>
+                                <td>{{user.mobil_nr}}</td>
+                                <td>{{ userTypeToString(user.usertype) }}</td>
+                              
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="Pædagog.js"></script>
+</body>
+
+</html>

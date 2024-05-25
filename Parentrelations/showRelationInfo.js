@@ -18,6 +18,12 @@ new Vue({
                 .then(response => {
                     console.log('Response from API:', response.data);
                     this.selectedStudent = response.data;
+
+                    // Hent studenter og brugere hvis ikke allerede hentet
+                    if (!this.students.length) {
+                        this.fetchStudentsAndUsers();
+                    }
+
                     console.log('Selected Student:', this.selectedStudent);
 
                     // Opdater forældrenes navne baseret på deres user_id
@@ -37,20 +43,50 @@ new Vue({
                 });
         },
         getStudentNameById(studentId) {
+            console.log('Finding student by ID:', studentId);
             const student = this.students.find(student => student.id === studentId);
+            console.log('Found student:', student);
             return student ? student.name : 'Ukendt studerende';
         },
         getUsernameById(userId) {
+            console.log('Finding user by ID:', userId);
             const user = this.users.find(user => user.user_Id === userId);
+            console.log('Found user:', user);
             return user ? user.name : 'Ukendt bruger';
         },
         getLastNameById(userId) {
+            console.log('Finding user by ID:', userId);
             const user = this.users.find(user => user.user_Id === userId);
+            console.log('Found user:', user);
             return user ? user.last_name : 'Ukendt bruger';
+        },
+        getAddressById(userId) {
+            console.log('Finding user by ID:', userId);
+            const user = this.users.find(user => user.user_Id === userId);
+            console.log('Found user:', user);
+            return user ? user.address : 'Ukendt bruger';
+        },
+        getZip_CodeById(userId) {
+            console.log('Finding user by ID:', userId);
+            const user = this.users.find(user => user.user_Id === userId);
+            console.log('Found user:', user);
+            return user ? user.zip_code : 'Ukendt bruger';
+        },
+        getE_mailById(userId) {
+            console.log('Finding user by ID:', userId);
+            const user = this.users.find(user => user.user_Id === userId);
+            console.log('Found user:', user);
+            return user ? user.e_mail : 'Ukendt bruger';
+        },
+        getMobilNumberById(userId) {
+            console.log('Finding user by ID:', userId);
+            const user = this.users.find(user => user.user_Id === userId);
+            console.log('Found user:', user);
+            return user ? user.mobil_nr : 'Ukendt bruger';
         },
         fetchStudentsAndUsers() {
             // Hent studenter data
-            axios.get('http://localhost:5191/api/Students')
+            axios.get('http://localhost:5191/api/Student')
                 .then(response => {
                     this.students = response.data;
                     console.log('Students fetched successfully:', this.students);

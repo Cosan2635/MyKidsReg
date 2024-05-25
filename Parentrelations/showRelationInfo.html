@@ -17,11 +17,15 @@
             <!-- Parent Relation Details Section -->
             <div>
                 <div class="user-details-card">
-                    <div v-if="selectedStudent.id">
+                    <div v-if="selectedStudent && selectedStudent.id">
                         <p><strong>ID:</strong> {{ selectedStudent.id }}</p>
-                        <p><strong>Barnets Navn:</strong> {{ getStudentNameById(selectedStudent.studentId) }}</p>
+                        <p><strong>Barnets Navn:</strong> {{ getStudentNameById(selectedStudent.student_id) }}</p>
                         <p><strong>Forældre Navn:</strong> {{ getUsernameById(selectedStudent.user_id) }}</p>
                         <p><strong>Efternavn:</strong> {{ getLastNameById(selectedStudent.user_id) }}</p>
+                        <p><strong>Adresse:</strong> {{ getAddressById(selectedStudent.user_id) }}</p>
+                        <p><strong>Post nummer:</strong> {{ getZip_CodeById(selectedStudent.user_id) }}</p>
+                        <p><strong>E_mail:</strong> {{ getE_mailById(selectedStudent.user_id) }}</p>
+                        <p><strong>Mobil nummer:</strong> {{ getMobilNumberById(selectedStudent.user_id) }}</p>
                     </div>
                     <div v-else>
                         <p>Indlæser detaljer...</p>

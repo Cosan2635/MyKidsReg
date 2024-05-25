@@ -46,8 +46,8 @@ new Vue({
                 .then(response => {
                     console.log('API response:', response);
                     if (response.status === 201) {
-                        alert('Bruger oprettet succesfuldt!');
-                        window.location.href = 'superadmin.html';
+                       
+                        window.location.href = '../Super_Admin/superadmin.html';
                     } else {
                         console.error('Uventet responsstatus:', response.status);
                         alert('Der opstod en fejl. Prøv igen.');

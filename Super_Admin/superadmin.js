@@ -159,10 +159,12 @@ new Vue({
                     return 'Super_Admin';
                 case 1:
                     return 'Admin';
-                case 3:
+                case 2:
                     return 'Pædagoge';
+                    case 3:
+                        return 'Forældre';
                 default:
-                    return 'Forældre';
+                    return 'Ukendt';
             }
         },
         navigateToAdminRelation() {

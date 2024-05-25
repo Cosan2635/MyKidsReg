@@ -2,33 +2,43 @@ new Vue({
     el: '#app',
     data: {
         API_URL: 'http://localhost:5191/api/Department',
-        institutionId: null,
+        institutions: [],
         departmentData: {
             name: '',
             institution_Id: null // Starter med null-værdi
         }
     },
+    mounted() {
+        // Hent alle institutioner ved indlæsning af siden
+        this.fetchInstitutions();
+    },
     methods: {
-        createDepartment() {
-            // Hent institutionens ID fra din backend
+        fetchInstitutions() {
             axios.get('http://localhost:5191/api/Institution')
                 .then(response => {
-                    this.departmentData.institution_Id = response.data.id; // Opdater institution_Id med ID fra backend
-                    this.postDepartment(); // Kald funktion til oprettelse af afdeling efter institutionens ID er modtaget
+                    this.institutions = response.data;
+                    console.log('Institutions fetched:', this.institutions);
                 })
                 .catch(error => {
-                    console.error('Fejl ved hentning af institutionens ID:', error);
-                    alert('Der opstod en fejl ved hentning af institutionens ID.');
+                    console.error('Fejl ved hentning af institutioner:', error);
+                    alert('Der opstod en fejl ved hentning af institutioner.');
                 });
         },
+        createDepartment() {
+            if (!this.departmentData.institution_Id) {
+                alert('Vælg venligst en institution.');
+                return;
+            }
+
+            this.postDepartment();
+        },
         postDepartment() {
-            // Udfør oprettelse af afdeling med data inklusive institutionens ID
             axios.post(this.API_URL, this.departmentData)
                 .then(response => {
                     console.log('API response:', response);
-                    if (response.status === 201) {
-                        alert('Afdeling oprettet succesfuldt!');
-                        window.location.href = 'admin.html';
+                    if (response.status === 200) {
+                        
+                        window.location.href = '../Department/department.html';
                     } else {
                         console.error('Uventet responsstatus:', response.status);
                         alert('Der opstod en fejl. Prøv igen.');
