@@ -30,7 +30,7 @@ new Vue({
     el: '#app',
     router,
     data: {
-        API_URL: 'https://mykidsreg20240529121704.azurewebsites.net/api/Users',
+        API_URL: 'http://localhost:5191/api/Users',
        
         INSTITUTION_API_URL: 'http://localhost:5191/api/Institution',
        
