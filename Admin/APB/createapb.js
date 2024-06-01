@@ -2,45 +2,41 @@ new Vue({
     el: '#app',
     data: {
         API_URL: 'http://localhost:5191/api/Users',
-        STUDENT_API_URL: 'http://localhost:5191/api/Student',
         TEACHER_RELATION_API_URL: 'http://localhost:5191/api/TeacherRelation',
         newRelation: {
             departmentId: null,
-            userId: null,
-            studentId: null
+            userId: null
         },
         departments: [],
         teachers: [],
-        students: []
+        errorMessage: null
     },
     methods: {
         createRelation() {
-            // Opret en relation mellem en lærer og en afdeling
-            axios.post(this.TEACHER_RELATION_API_URL, {
-                userId: this.newRelation.userId,
-                departmentId: this.newRelation.departmentId
-            })
-            .then(teacherRelationResponse => {
-                console.log('Relation mellem lærer og afdeling oprettet:', teacherRelationResponse.data);
+            console.log('Nye relation:', this.newRelation);
         
-                // Hvis der er valgt en student, skal vi opdatere department for den student
-                if (this.newRelation.studentId) {
-                    axios.put(`${this.STUDENT_API_URL}/${this.newRelation.studentId}`, {
-                        departmentId: this.newRelation.departmentId
-                    })
-                    .then(studentResponse => {
-                        console.log('Afdeling opdateret for studenten:', studentResponse.data);
-                        window.location.href = '../APB/apb.html'; // Gå tilbage til hovedsiden eller en anden passende side
-                    })
-                    .catch(studentError => {
-                        console.error('Fejl ved opdatering af afdeling for studenten:', studentError);
-                    });
-                } else {
-                    window.location.href = '../APB/apb.html'; // Gå tilbage til hovedsiden eller en anden passende side
-                }
+            if (!this.newRelation.userId || !this.newRelation.departmentId) {
+                this.errorMessage = 'Både afdeling og pædagog skal vælges.';
+                console.log('Fejl: Både afdeling og pædagog skal vælges.');
+                return;
+            }
+        
+            console.log('Forsøger at oprette relation med data:', {
+                User_id: this.newRelation.userId,
+                Department_id: this.newRelation.departmentId
+            });
+        
+            axios.post(this.TEACHER_RELATION_API_URL, {
+                User_id: this.newRelation.userId,
+                Department_id: this.newRelation.departmentId
             })
-            .catch(teacherRelationError => {
-                console.error('Fejl ved oprettelse af relation mellem lærer og afdeling:', teacherRelationError);
+            .then(response => {
+                console.log('Relation mellem lærer og afdeling oprettet:', response.data);
+                window.location.href = '../APB/apb.html';
+            })
+            .catch(error => {
+                console.error('Fejl ved oprettelse af relation mellem lærer og afdeling:', error.response);
+                this.errorMessage = 'Der opstod en fejl ved oprettelsen af relationen. Prøv igen.';
             });
         },
         
@@ -48,33 +44,26 @@ new Vue({
             axios.get('http://localhost:5191/api/Department')
                 .then(response => {
                     this.departments = response.data;
+                    console.log('Afdelinger hentet:', this.departments);
                 })
                 .catch(error => {
                     console.error("Fejl ved hentning af afdelinger:", error);
                 });
         },
+
         fetchTeachers() {
             axios.get(this.API_URL)
                 .then(response => {
                     this.teachers = response.data.filter(user => user.usertype === 2);
+                    console.log('Pædagoger hentet:', this.teachers);
                 })
                 .catch(error => {
                     console.error("Fejl ved hentning af pædagoger:", error);
-                });
-        },
-        fetchStudents() {
-            axios.get(this.STUDENT_API_URL)
-                .then(response => {
-                    this.students = response.data;
-                })
-                .catch(error => {
-                    console.error("Fejl ved hentning af studerende:", error);
                 });
         }
     },
     mounted() {
         this.fetchDepartments();
         this.fetchTeachers();
-        this.fetchStudents();
     }
 });

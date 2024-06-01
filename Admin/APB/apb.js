@@ -80,13 +80,14 @@ new Vue({
             window.location.href = `../APB/createapb.html`;
         },
         updateRelation(relation) {
-            axios.put(`http://localhost:5191/api/TeacherRelation/${relation.id}`, relation)
-                .then(response => {
-                    this.fetchRelations();
-                })
-                .catch(error => {
-                    console.error("There was an error updating the relation!", error);
-                });
+            window.location.href=`../APB/editapb.html`
+            // axios.put(`http://localhost:5191/api/TeacherRelation/${relation.id}`, relation)
+            //     .then(response => {
+            //         this.fetchRelations();
+            //     })
+            //     .catch(error => {
+            //         console.error("There was an error updating the relation!", error);
+            //     });
         },
         deleteRelation(relation) {
             axios.delete(`http://localhost:5191/api/TeacherRelation/${relation.id}`)
@@ -119,7 +120,8 @@ new Vue({
                 default:
                     return 'Ukendt';
             }
-        }
+        },
+        
     },
     mounted() {
         this.fetchRelations();

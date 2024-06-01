@@ -45,7 +45,7 @@ new Vue({
             axios.post('http://localhost:5191/api/Users', apiUserData)
                 .then(response => {
                     console.log('API response:', response);
-                    if (response.status === 201) {
+                    if (response.status === 200) {
                        
                         window.location.href = '../Super_Admin/superadmin.html';
                     } else {

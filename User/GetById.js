@@ -34,8 +34,10 @@ new Vue({
                     return 'Admin';
                 case 2:
                     return 'Pædagoge';
+case 3: 
+return 'Forældre';
                 default:
-                    return 'Forældre';
+                    return 'Ukendt';
             }
         },
         goBack() {

@@ -6,11 +6,10 @@
     <title>Super-admin side</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <link rel="stylesheet" href="../new_styles.css">
 </head>
 <body>
+    
     <div id="app">
         <nav id="sidebar" class="sidebar">
             <div class="sidebar-sticky">
@@ -36,10 +35,16 @@
         </nav>
 
         <main role="main" class="main-content">
+            
+            <router-view></router-view>
+            <button class="btn btn-danger btn-sm" @click="logout">Log ud</button>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                
                 <h1 class="h2">{{ tableTitle }}</h1>
-                <button class="btn btn-success btn-sm" @click="createInstitution" v-if="currentSection === 'institution'">Opret Institution</button>
-                <button class="btn btn-success btn-sm btn-create-user" @click="createUser" v-if="currentSection === 'bruger'">Opret Bruger</button>
+               
+         
+
+                <button class="btn btn-success btn-smm btn-create-user"  @click="createUser" v-if="currentSection === 'bruger'" >Opret Bruger</button>
             </div>
 
             <!-- Table Section -->
@@ -63,7 +68,7 @@
                                 <td>{{ item.name }}</td>
                                 <td>{{ item.last_name }}</td>
                                 <td>{{ userTypeToString(item.usertype) }}</td>
-                                <td class="text-right">
+                                <td class="text-right button-group">
                                     <button class="btn btn-info btn-sm" title="GetById" @click="viewUserDetails(item.user_Id)"><i class="fas fa-info-circle"></i></button>
                                     <button class="btn btn-warning btn-sm" title="Update" @click="editItem(item.user_Id)"><i class="fas fa-edit"></i></button>
                                     <button class="btn btn-danger btn-sm" title="Slet" @click="deleteItem(item.user_Id)"><i class="fas fa-trash-alt"></i></button>
@@ -102,8 +107,6 @@
                                         <button class="btn btn-danger btn-sm rounded-circle" title="Slet" @click="deleteItem(item.user_Id)"><i class="fas fa-trash-alt"></i></button>
                                     </div>
                                 </td>
-                                
-                                
                             </tr>
                         </tbody>
                     </table>
@@ -111,6 +114,10 @@
             </div>
         </main>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
     <script src="superadmin.js"></script>
 </body>
 </html>

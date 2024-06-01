@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="da">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create APB</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Tilføj eventuelle yderligere CSS-filer efter behov -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 </head>
-
 <body>
     <div id="app" class="container">
         <h1>Create APB</h1>
@@ -19,32 +16,25 @@
             <!-- Vælg afdeling -->
             <div class="form-group">
                 <label for="department">Department:</label>
-                <select v-model="newRelation.departmentId" class="form-control" id="department">
-                    <option value="" disabled>Vælg afdeling</option>
+                <select v-model="newRelation.departmentId" class="form-control" id="department" required>
+                    <option value="" disabled selected>Vælg afdeling</option>
                     <option v-for="department in departments" :key="department.id" :value="department.id">{{ department.name }}</option>
                 </select>
             </div>
             <!-- Vælg pædagog -->
             <div class="form-group">
                 <label for="teacher">Teacher:</label>
-                <select v-model="newRelation.userId" class="form-control" id="teacher">
-                    <option value="" disabled>Vælg pædagog</option>
-                    <option v-for="teacher in teachers" :key="teacher.user_id" :value="teacher.user_id">{{ teacher.name }}</option>
-                </select>
-            </div>
-            <!-- Vælg student -->
-            <div class="form-group">
-                <label for="student">Student:</label>
-                <select v-model="newRelation.studentId" class="form-control" id="student">
-                    <option value="" disabled>Vælg student</option>
-                    <option v-for="student in students" :key="student.id" :value="student.id">{{ student.name }}</option>
+                <select v-model="newRelation.userId" class="form-control" id="teacher" required>
+                    <option value="" disabled selected>Vælg pædagog</option>
+                    <option v-for="teacher in teachers" :key="teacher.user_Id" :value="teacher.user_Id">{{ teacher.name }}</option>
                 </select>
             </div>
             <!-- Submit knap -->
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
+        <!-- Fejlmeddelelse -->
+        <div v-if="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
     </div>
     <script src="createapb.js"></script>
 </body>
-
 </html>

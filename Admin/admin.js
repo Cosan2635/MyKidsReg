@@ -30,7 +30,7 @@ new Vue({
         },
         viewDetails(studentId) {
             if (studentId != null) {
-                window.location.href = `../Admin/ViewStudentDetails/viewstudentdetails.html?id=${studentId}`;
+                window.location.href = `../Super_Admin/Student/showStudent.html?id=${studentId}`;
             } else {
                 console.error('Ugyldigt student-ID.');
             }
@@ -54,6 +54,11 @@ new Vue({
         },
         assignToDepartment(id) {
             window.location.href = `../Admin/StudentRelation/assignToDepartment.html?id=${id}`;
+        },
+        logout() {
+            // Implementer logud-logik her
+            // For eksempel, hvis du vil navigere til index.html, kan du bruge window.location.href
+            window.location.href = "../Login/index.html";
         }
     },
     mounted() {

@@ -1,7 +1,36 @@
+// Opret komponenterne
+const BrugerComponent = {
+    template: `
+      <div>
+        <h1>Bruger Sektion</h1>
+        <!-- Indhold for bruger sektionen -->
+      </div>
+    `
+  };
+  
+  const InstitutionComponent = {
+    template: `
+      <div>
+        <h1>Institution Sektion</h1>
+        <!-- Indhold for institution sektionen -->
+      </div>
+    `
+  };
+  
+  // Opret routeren
+  const router = new VueRouter({
+    routes: [
+      { path: '/bruger', component: BrugerComponent },
+      { path: '/institution', component: InstitutionComponent }
+    ]
+  });
+  
+
 new Vue({
     el: '#app',
+    router,
     data: {
-        API_URL: 'http://localhost:5191/api/Users',
+        API_URL: 'https://mykidsreg20240529121704.azurewebsites.net/api/Users',
        
         INSTITUTION_API_URL: 'http://localhost:5191/api/Institution',
        
@@ -170,8 +199,14 @@ new Vue({
         navigateToAdminRelation() {
             this.currentSection = 'AdminRelation';
             this.loadAdminRelations(); // Load admin relations data
+        },
+        logout() {
+            // Implementer logud-logik her
+            // For eksempel, hvis du vil navigere til index.html, kan du bruge window.location.href
+            window.location.href = "../Login/index.html";
         }
     },
+    
     mounted() {
         this.loadTableData('bruger'); 
     }

@@ -13,9 +13,8 @@ new Vue({
         loadUsers() {
             axios.get(this.USER_API_URL)
                 .then(response => {
-                    // Filtrer brugere efter deres rolle som "Admin" (user_type === 1)
-                    // this.users = response.data.filter(user => user.user_type === "Admin");
-                    this.users = response.data;
+                    // Filtrer brugere efter deres rolle som "Admin" (usertype === 1)
+                    this.users = response.data.filter(user => user.usertype === 1);
                 })
                 .catch(error => {
                     console.error('Fejl ved hentning af brugere:', error);

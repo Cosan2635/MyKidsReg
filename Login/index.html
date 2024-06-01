@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="da">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ændre Adgangskode</title>
+    <title>Log ind</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         /* Generelle stilarter */
-        body, html {
+        body,
+        html {
             height: 100%;
             margin: 0;
             display: flex;
@@ -42,14 +44,15 @@
         }
 
         .input-group input {
-            width: 100%;
-            padding: 12px;
+            width: calc(100% - 40px); /* Justere bredden for at give plads til ikonet */
+            padding: 12px 30px 12px 12px; /* Juster padding til at rumme ikonet */
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 16px;
             box-sizing: border-box;
         }
 
+        /* Vis/Skjul ikon */
         .input-group .toggle-password {
             position: absolute;
             top: 50%;
@@ -58,47 +61,26 @@
             cursor: pointer;
         }
 
-        /* Styrkeindikator */
-        .password-strength-meter {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .strength-bar {
-            height: 10px;
-            width: 100%;
-            border-radius: 5px;
-            background-color: #eee;
-            position: relative;
-        }
-
-        .strength-bar.weak {
-            background-color: #ff6347; /* Rød farve for svag styrke */
-        }
-
-        .strength-bar.medium {
-            background-color: #ffd700; /* Gul farve for middel styrke */
-        }
-
-        .strength-bar.strong {
-            background-color: #32cd32; /* Grøn farve for stærk styrke */
-        }
-
-        .strength-text {
-            position: absolute;
-            bottom: -20px;
-            width: 100%;
-            text-align: center;
-            font-size: 12px;
-            font-weight: bold;
-            color: #333;
-        }
-
         /* Fejlmeddelelse */
-        #error-message {
+        .error-message {
             color: #ff6347;
             text-align: center;
             margin-top: 10px;
+        }
+
+        /* Glemt adgangskode link */
+        .forgot-password {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .forgot-password a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
         }
 
         /* Submit-knap */
@@ -119,35 +101,30 @@
         }
     </style>
 </head>
+
 <body>
     <div class="login-section" id="app">
-        <h2>Ændre Adgangskode</h2>
-        <form @submit.prevent="onChangePasswordSubmit">
-            <div class="input-group password-input-group">
-                <input :type="showNewPassword ? 'text' : 'password'" id="new-password" name="new-password" v-model="newPassword" placeholder="Ny adgangskode" required>
-                <span class="toggle-password" @click="togglePasswordVisibility('newPassword')">
-                    <i :class="showNewPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+        <h2>Log ind</h2>
+        <form @submit.prevent="login">
+            <div class="input-group">
+                <input type="text" id="username" name="username" v-model="username" placeholder="Brugernavn" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" name="password" v-model="password" placeholder="Adgangskode" required>
+                <span class="toggle-password" @click="togglePasswordVisibility">
+                    <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
                 </span>
             </div>
-            <div class="input-group password-input-group">
-                <input :type="showConfirmPassword ? 'text' : 'password'" id="confirm-password" name="confirm-password" v-model="confirmPassword" placeholder="Bekræft adgangskode" required>
-                <span class="toggle-password" @click="togglePasswordVisibility('confirmPassword')">
-                    <i :class="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
-                </span>
-            </div>
-            <div class="password-strength-meter">
-                <div class="strength-bar" :style="{ width: getPasswordStrengthIndicator(passwordStrength) + '%' }"></div>
-                <p class="strength-text">{{ getStrengthText(passwordStrength) }}</p>
-            </div>
-            <button type="submit">Ændre Adgangskode</button>
+            <button type="submit">Log ind</button>
         </form>
         <p id="error-message">{{ errorMessage }}</p>
+        <p id="forgot-password"><a href="../Login/confirmpassword.html">Glemt adgangskode?</a></p>
     </div>
 
     <!-- Link til Vue.js og Axios -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-    <!-- Link til din JS-fil -->
     <script src="index.js"></script>
 </body>
+
 </html>

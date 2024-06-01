@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pædagog Afdeling Student</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../new_styles.css">
+   
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <link rel="stylesheet" href="new_styles.css">
 </head>
 
 <body>
@@ -42,6 +43,7 @@
                                     <th>Afdeling</th>
                                     <th>Pædagog</th>
                                     <th>Student</th>
+                                    <th class="text-right">Handlinger</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,6 +52,16 @@
                                     <td>{{ relation.departmentName }}</td>
                                     <td>{{ relation.teacherName }}</td>
                                     <td>{{ relation.studentName }}</td>
+                                    <td class="text-right">
+                                       
+                                        <button class="btn btn-warning btn-sm rounded-circle" title="Opdater" @click=" updateRelation(relation.id)">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-danger btn-sm rounded-circle" title="Slet" @click="deleteItem(item.id)">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                   
                                 </tr>
                             </tbody>
                         </table>

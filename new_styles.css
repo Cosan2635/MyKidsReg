@@ -96,7 +96,16 @@ li {
     justify-content: center;
     font-size: 12px; /* Mindre font-størrelse */
 }
-
+.btn-smm {
+    width: 80px; /* Mindre bredde */
+    height: 34px; /* Mindre højde */
+    padding: 0; /* Fjern indvendig afstand */
+    margin: 0 2px; /* Tilføj lidt margin til siderne */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px; /* Mindre font-størrelse */
+}
 .btn-sm i {
     margin: 0; /* Fjern margin fra ikon */
 }

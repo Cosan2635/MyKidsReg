@@ -26,7 +26,7 @@
                     <option v-for="department in departments" :value="department.id">{{ department.name }}</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Tilføj</button>
+            <button type="submit" class="btn btn-primary" @click =" assignStudentToDepartment">Tilføj</button>
             <button type="button" class="btn btn-secondary" @click="goBack">Tilbage</button>
         </form>
     </div>

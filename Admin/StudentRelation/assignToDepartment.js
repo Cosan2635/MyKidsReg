@@ -12,7 +12,7 @@ new Vue({
                 departmentId: this.departmentId
             };
 
-            const url = `http://localhost:5191/api/Student/assignToDepartment`;
+            const url = `http://localhost:5191/api/Student`;
             axios.post(url, assignmentData)
                 .then(response => {
                     console.log('Student tildelt til afdeling:', response.data);
@@ -23,11 +23,11 @@ new Vue({
                 });
         },
         goBack() {
-            window.location.href = 'admin.html';
+            window.location.href = '../admin.html';
         },
         fetchDepartments() {
             // Hent afdelinger
-            axios.get('http://localhost:5191/api/departments')
+            axios.get('http://localhost:5191/api/Department')
                 .then(response => {
                     this.departments = response.data;
                 })
