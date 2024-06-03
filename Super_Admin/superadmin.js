@@ -3,10 +3,11 @@ const BrugerComponent = {
     template: `
       <div>
         <h1>Bruger Sektion</h1>
-        <!-- Indhold for bruger sektionen -->
+        <router-link to="/createUser" class="nav-link">Opret Bruger</router-link>
       </div>
     `
   };
+  
   
   const InstitutionComponent = {
     template: `
@@ -16,14 +17,48 @@ const BrugerComponent = {
       </div>
     `
   };
+  const StudentComponent = {
+    template: `
+      <div>
+        <h1>Studerende Sektion</h1>
+        <p>Dette er indholdet for studerende sektionen.</p>
+        <!-- Indhold for studerende sektionen -->
+      </div>
+    `
+  };
+  
+  const ParentStudentComponent = {
+    template: `
+      <div>
+        <h1>Forældre & Studerende Sektion</h1>
+        <p>Dette er indholdet for forældre & studerende sektionen.</p>
+        <!-- Indhold for forældre & studerende sektionen -->
+      </div>
+    `
+  };
+  
+  const AdminInstitutionComponent = {
+    template: `
+      <div>
+        <h1>Admin & Institution Sektion</h1>
+        <p>Dette er indholdet for admin & institution sektionen.</p>
+        <!-- Indhold for admin & institution sektionen -->
+      </div>
+    `
+  };
+  
   
   // Opret routeren
   const router = new VueRouter({
     routes: [
       { path: '/bruger', component: BrugerComponent },
-      { path: '/institution', component: InstitutionComponent }
+      { path: '/institution', component: InstitutionComponent },
+      { path: '/studerende', component: StudentComponent },
+      { path: '/parentrelation', component: ParentStudentComponent },
+      { path: '/adminrelations', component: AdminInstitutionComponent }
     ]
   });
+  
   
 
 new Vue({
